@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:primeiro_app/app/database/sqlite/connection.dart';
+import 'package:primeiro_app/app/database/sqlite/dao/contact_dao_impl.dart';
+import 'package:primeiro_app/app/domain/entities/contact.dart';
 import 'package:primeiro_app/app/my_app.dart';
-import 'package:sqflite/sqflite.dart';
 
 class ContactList extends StatelessWidget {
   final lista = [
@@ -10,10 +10,8 @@ class ContactList extends StatelessWidget {
     {'nome':'Lion', 'telefone':'(04) 6010', 'avatar':'https://cdn.pixabay.com/photo/2017/10/25/16/54/african-lion-2888519_960_720.jpg'},
   ];
 
-Future<List<Map<String,dynamic>>> buscar()async {
-  Database db =await Connection.get();
-    return db.query('contact');
-
+Future<List<Contact>> buscar()async {
+  return ContactDAOImpl().find();
 }
 
   @override 
@@ -22,7 +20,7 @@ Future<List<Map<String,dynamic>>> buscar()async {
       future: buscar(),
       builder: (context, futuro){
         if(futuro.hasData){
-          var lista = futuro.data;
+          List<Contact> lista = futuro.data;
           return Scaffold(
             appBar: AppBar(
               title: Text('Lista de contatos'),
@@ -39,11 +37,11 @@ Future<List<Map<String,dynamic>>> buscar()async {
               itemCount: lista.length,
               itemBuilder: (context, i){
                 var contato = lista[i];
-                var avatar = CircleAvatar(backgroundImage: NetworkImage(contato['url_avatar']),);
+                var avatar = CircleAvatar(backgroundImage: NetworkImage(contato.urlAvatar),);
                 return ListTile(
                   leading: avatar,
-                  title: Text(contato['nome']),
-                  subtitle: Text(contato['telefone']),
+                  title: Text(contato.nome),
+                  subtitle: Text(contato.telefone),
                   trailing: Container(
                     width: 100,
                     child: Row(
