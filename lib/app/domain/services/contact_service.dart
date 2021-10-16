@@ -37,7 +37,7 @@ class ContactService{
   validateEmail(String email){
     if(email == null){
       throw new DomainLayerException('O e-mail é obrigatório.');
-    }else if(email.contains('@')){
+    }else if(!email.contains('@')){
       throw new DomainLayerException('O e-mail deve possuir @.');
     }
   }
