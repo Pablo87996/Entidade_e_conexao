@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:primeiro_app/app/view/contact_form_back.dart';
@@ -21,6 +23,7 @@ class ContactForm extends StatelessWidget {
       validator: back.validateEmail,
       onSaved: (newValue) => back.contact.email = newValue,
       initialValue: back.contact.email,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         labelText: 'E-mail:',
         hintText: 'exemplo@gmail.com',
