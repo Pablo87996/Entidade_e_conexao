@@ -20,8 +20,9 @@ class ContactFormBack{
   }
 
   //Salvar
-  save() async{
+  save(BuildContext context) async{
     await _service.save(contact);
+    Navigator.of(context).pop();
   }
 
   //Validações

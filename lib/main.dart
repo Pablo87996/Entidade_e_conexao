@@ -3,7 +3,7 @@ import 'package:primeiro_app/app/injection.dart';
 
 import 'app/my_app.dart';
 
-void main() {
+void main() async{
   setupinjection();
   runApp(MyApp());
 }
