@@ -6,15 +6,15 @@ import 'package:primeiro_app/app/domain/interfaces/contact_dao.dart';
 class ContactService{
   var _dao = GetIt.I.get<ContactDAO>();
 
-  save(Contact contact){
+  save(Contact contact)async{
     validateName(contact.nome);
     validateEmail(contact.email);
     validatePhone(contact.telefone);
-    _dao.save(contact);
+    await _dao.save(contact);
   }
 
-  remove(dynamic id){
-    _dao.remove(id);
+  remove(dynamic id)async{
+    await _dao.remove(id);
   }
 
   Future<List<Contact>>find(){
